@@ -22,9 +22,11 @@ function setup() {
   x = width / 2;
   y = height / 2;
   lineOffset = fontSize - 20;
-  px = x + (lineOffset);
+  px = x;
   py = y;
-}// setup() Ende ---
+  ax = x + stepSize;
+  ay = y;
+}// --- setup() Ende ---
 
 function draw() {
   if (mouseIsOn ){
@@ -33,7 +35,7 @@ function draw() {
     textSize(fontSize);
     fill(255);
     text(num, x, y);
-    if (num > 1){
+    if (num > 0){
       push();
       stroke(255);
       strokeWeight(1);
@@ -47,25 +49,27 @@ function draw() {
   if(step > maxSteps){
     noLoop();
   }
-}// draw() Ende ---
+}// --- draw() Ende ---
 
 function mousePressed(){
   mouseIsOn = true;
-}// mousePressed() Ende ---
+}// --- mousePressed() Ende ---
 
 function theMagic(){
   if (step % 2 == 0){
+    px = ax;
+    py = y;
     y -= stepSize;
-    py = ay + (lineOffset); 
-    ay = y - (lineOffset);
+    ay = y;
   }else{
+    px = ax;
+    py = ay;
     x += stepSize;
-    px = ax - (lineOffset);
-    ax = x + (lineOffset);
+    ax = x;
   }
 
   num++;
   step++;
 
-}
+}// --- theMagic() Ende ---
 
