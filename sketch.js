@@ -19,11 +19,11 @@ function setup() {
   const rows = width / stepSize;
   const cols = height / stepSize;
   maxSteps = rows * cols;
-  fontSize = 45;
+  fontSize = stepSize / 4;
   x = width / 2;
   y = height / 2;
   lineOffset = fontSize - 20;
-  px = x;
+  px = x - lineOffset;
   py = y;
   ax = x + stepSize;
   ay = y;
@@ -62,24 +62,24 @@ function theMagic(){
   // }else{
   //   stepsPerSide = 2;
   // }
-  px = ax;
-  py = ay;
+  px = x;
+  py = y;
   switch (richtung){
     case 0:// nach rechts
       x += stepSize;
-      ax = x;
+      ax = x - lineOffset;
       break;
     case 1:// nach oben
       y -= stepSize;
-      ay = y;
+      ay = y + lineOffset;
       break;
     case 2:// nach links
       x -= stepSize;
-      ax = x;
+      ax = x + lineOffset;
       break;
     case 3:// nach unten
       y += stepSize;
-      ay = y;
+      ay = y - lineOffset;
       break;
   }
   if (step % stepsPerSide == 0){// wenn eine Seitenlänge gestept wurde, dann abbiegen.
