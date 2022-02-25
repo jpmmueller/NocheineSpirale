@@ -5,7 +5,8 @@ let px,py;
 let stepSize;
 let num = 1;
 let step = 1;
-let state = 1;
+let stepsPerSide = 1;
+let richtung = 0;
 let turnCounter = 0;
 let fontSize;
 let lineOffset;
@@ -14,7 +15,7 @@ let maxSteps;
 function setup() {
   createCanvas(500, 500);
   background(0);
-  stepSize = 50;
+  stepSize = 100;
   const rows = width / stepSize;
   const cols = height / stepSize;
   maxSteps = rows * cols;
@@ -35,16 +36,16 @@ function draw() {
     textSize(fontSize);
     fill(255);
     text(num, x, y);
-    if (num > 0){
+    // if (num > 0){
       push();
       stroke(255);
       strokeWeight(1);
       line(px,py,ax,ay);      
       pop();
-    }
+    //  }
     theMagic();
   }// --- mouseIsOn() Ende ---
-  mouseIsOn = false;
+  // mouseIsOn = false;
 
   if(step > maxSteps){
     noLoop();
@@ -52,24 +53,44 @@ function draw() {
 }// --- draw() Ende ---
 
 function mousePressed(){
-  mouseIsOn = true;
+  mouseIsOn = !mouseIsOn;
 }// --- mousePressed() Ende ---
 
 function theMagic(){
-  if (step % 2 == 0){
-    px = ax;
-    py = y;
-    y -= stepSize;
-    ay = y;
-  }else{
-    px = ax;
-    py = ay;
-    x += stepSize;
-    ax = x;
+  // if (num <= 2){
+  //   stepsPerSide = 3;
+  // }else{
+  //   stepsPerSide = 2;
+  // }
+  px = ax;
+  py = ay;
+  switch (richtung){
+    case 0:// nach rechts
+      x += stepSize;
+      ax = x;
+      break;
+    case 1:// nach oben
+      y -= stepSize;
+      ay = y;
+      break;
+    case 2:// nach links
+      x -= stepSize;
+      ax = x;
+      break;
+    case 3:// nach unten
+      y += stepSize;
+      ay = y;
+      break;
   }
-
-  num++;
+  if (step % stepsPerSide == 0){// wenn eine Seitenlänge gestept wurde, dann abbiegen.
+    richtung = (richtung + 1) % 4;// Mod 4 bleibt immer zwischen 0 und 4.
+    turnCounter++;
+    if (turnCounter % 2 == 0){// wenn 2 x abgebogen wurde, dann sollen die Seitenlängen um 1 erhöht werden.
+      stepsPerSide++;
+    }
+  }
   step++;
+  num++;
 
 }// --- theMagic() Ende ---
 
