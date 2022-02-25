@@ -22,7 +22,7 @@ function setup() {
   fontSize = stepSize / 4;
   x = width / 2;
   y = height / 2;
-  lineOffset = fontSize - 20;
+  lineOffset = 5;
   px = x - lineOffset;
   py = y;
   ax = x + stepSize;
@@ -66,18 +66,22 @@ function theMagic(){
   py = y;
   switch (richtung){
     case 0:// nach rechts
+      px = x + lineOffset;
       x += stepSize;
       ax = x - lineOffset;
       break;
     case 1:// nach oben
+      py = y + lineOffset;
       y -= stepSize;
       ay = y + lineOffset;
       break;
     case 2:// nach links
+      px = x - lineOffset;
       x -= stepSize;
       ax = x + lineOffset;
       break;
     case 3:// nach unten
+      py = y + lineOffset;
       y += stepSize;
       ay = y - lineOffset;
       break;
