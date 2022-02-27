@@ -16,7 +16,7 @@ function setup() {
   createCanvas(500, 500);
   background(0);
   fontSize = 15;
-  stepSize = fontSize * 1.5;
+  stepSize = fontSize / 1.5;
   const rows = width / stepSize;
   const cols = height / stepSize;
   maxSteps = rows * cols;
@@ -36,17 +36,19 @@ function draw() {
     textSize(fontSize);
     if (isPrime(num) == true){
       fill(255,0,0);
-      text(num, x, y);
-    }//else if(isPrime(num) == false){
-    //   fill(255);
-    // }
-    // text(num, x, y);
-    theMagic();
-    push();
+      circle(x, y, fontSize / 2);
+    }
+
     stroke(255);
     strokeWeight(1);
-    line(px,py,ax,ay);      
-    pop();
+    console.log(num);
+    console.log(isPrime(num));
+    line(x, y, px, py);
+    theMagic();
+    // px = x;
+    // py = y;     
+    num++;
+    step++;
   }// --- mouseIsOn() Ende ---
   // mouseIsOn = false;
 
@@ -56,7 +58,7 @@ function draw() {
 }// --- draw() Ende ---
 
 function mousePressed(){
-  // mouseIsOn = true;//!mouseIsOn;
+  // mouseIsOn = true;
   mouseIsOn = !mouseIsOn;
 }// --- mousePressed() Ende ---
 
@@ -65,28 +67,28 @@ function theMagic(){
   py = y;
   switch (richtung){
     case 0:// nach rechts
-      px = x + lineOffset;
+      // px = x + lineOffset;
       x += stepSize;
-      ax = x - lineOffset;
-      ay = y;
+      // ax = x - lineOffset;
+      // ay = y;
       break;
     case 1:// nach oben
-      py = y - lineOffset;
+      // py = y - lineOffset;
       y -= stepSize;
-      ay = y + lineOffset;
-      ax = x;
+      // ay = y + lineOffset;
+      // ax = x;
       break;
     case 2:// nach links
-      px = x - lineOffset;
+      // px = x - lineOffset;
       x -= stepSize;
-      ax = x + lineOffset;
-      ay = y;
+      // ax = x + lineOffset;
+      // ay = y;
       break;
     case 3:// nach unten
-      py = y + lineOffset;
+      // py = y + lineOffset;
       y += stepSize;
-      ay = y - lineOffset;
-      ax = x;
+      // ay = y - lineOffset;
+      // ax = x;
       break;
   }
   if (step % stepsPerSide == 0){// wenn eine Seitenlänge gestept wurde, dann abbiegen.
@@ -96,17 +98,14 @@ function theMagic(){
       stepsPerSide++;
     }
   }
-  step++;
-  num++;
 }// --- theMagic() Ende ---
 
 function isPrime(number){
-  if (number == 1){
-    return false;
-  }
+  if (number == 1){return false;}
   for (let i = 2; i <= sqrt(number); i++){
-    if ( number % 2 == 0)
-    return false;
+    if ( number % i == 0){
+      return false;
+    }
   }
   return true;
 }
