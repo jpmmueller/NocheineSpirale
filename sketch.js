@@ -61,11 +61,6 @@ function mousePressed(){
 }// --- mousePressed() Ende ---
 
 function theMagic(){
-  // if (num <= 2){
-  //   stepsPerSide = 3;
-  // }else{
-  //   stepsPerSide = 2;
-  // }
   px = x;
   py = y;
   switch (richtung){
