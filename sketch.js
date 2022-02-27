@@ -110,7 +110,7 @@ function isPrime(number){
     return false;
   }
   for (let i = 2; i <= sqrt(number); i++){
-    if ( number % 2 == 0)
+    if ( number % i == 0)
     return false;
   }
   return true;
