@@ -35,8 +35,10 @@ function draw() {
     noStroke();
     textSize(fontSize);
     if (isPrime(num) == true){
+      noStroke();
       fill(255,0,0);
-      circle(x, y, fontSize / 2);
+      // circle(x, y, fontSize / 2);
+      text(num, x, y);
     }
 
     stroke(255);
