@@ -14,9 +14,9 @@ let maxSteps;
 
 function setup() {
   createCanvas(500, 500);
-  background(0);
-  fontSize = 15;
-  stepSize = 15;//fontSize / 1.5;
+  background(50,150,255);
+  stepSize = 4;//fontSize / 1.5;
+  fontSize = ((stepSize * 2));
   const rows = width / stepSize;
   const cols = height / stepSize;
   maxSteps = rows * cols;
@@ -36,16 +36,16 @@ function draw() {
       circle(x, y, fontSize / 2);
       // text(num, x, y);
     }
-    stroke(255);
-    strokeWeight(1);
+    // stroke(255);
+    // strokeWeight(0.5);
     console.log(num);
     console.log(isPrime(num));
-    line(x, y, px, py);
+    // line(x, y, px, py);
     theMagic();
     num++;
     step++;
   }// --- if mouseIsOn() Ende ---
-  mouseIsOn = false;
+  // mouseIsOn = false;
 
   if(step > maxSteps){
     noLoop();
@@ -53,8 +53,8 @@ function draw() {
 }// --- draw() Ende ---
 
 function mousePressed(){
-  mouseIsOn = true;
-  // mouseIsOn = !mouseIsOn;
+  // mouseIsOn = true;
+  mouseIsOn = !mouseIsOn;
 }// --- mousePressed() Ende ---
 
 function theMagic(){
