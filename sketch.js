@@ -15,8 +15,8 @@ let maxSteps;
 function setup() {
   createCanvas(500, 500);
   background(0);
-  fontSize = 15;
-  stepSize = fontSize * 1.5;
+  fontSize = 20;
+  stepSize = 50;
   const rows = width / stepSize;
   const cols = height / stepSize;
   maxSteps = rows * cols;
@@ -37,10 +37,10 @@ function draw() {
     if (isPrime(num) == true){
       fill(255,0,0);
       text(num, x, y);
-    }//else if(isPrime(num) == false){
-    //   fill(255);
-    // }
-    // text(num, x, y);
+    }else if(isPrime(num) == false){
+      fill(255);
+    }
+    text(num, x, y);
     theMagic();
     push();
     stroke(255);
