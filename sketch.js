@@ -15,18 +15,18 @@ let maxSteps;
 function setup() {
   createCanvas(500, 500);
   background(0);
-  stepSize = 100;
+  fontSize = 15;
+  stepSize = fontSize * 1.5;
   const rows = width / stepSize;
   const cols = height / stepSize;
   maxSteps = rows * cols;
-  fontSize = stepSize / 4;
   x = width / 2;
   y = height / 2;
-  lineOffset = 5;
-  px = x - lineOffset;
-  py = y;
-  ax = x + stepSize;
-  ay = y;
+  lineOffset = fontSize;
+  // px = x - lineOffset;
+  // py = y;
+  // ax = x + stepSize;
+  // ay = y;
 }// --- setup() Ende ---
 
 function draw() {
@@ -34,16 +34,19 @@ function draw() {
     textAlign(CENTER,CENTER);
     noStroke();
     textSize(fontSize);
-    fill(255);
-    text(num, x, y);
-    // if (num > 0){
-      push();
-      stroke(255);
-      strokeWeight(1);
-      line(px,py,ax,ay);      
-      pop();
-    //  }
+    if (isPrime(num) == true){
+      fill(255,0,0);
+      text(num, x, y);
+    }//else if(isPrime(num) == false){
+    //   fill(255);
+    // }
+    // text(num, x, y);
     theMagic();
+    push();
+    stroke(255);
+    strokeWeight(1);
+    line(px,py,ax,ay);      
+    pop();
   }// --- mouseIsOn() Ende ---
   // mouseIsOn = false;
 
@@ -53,6 +56,7 @@ function draw() {
 }// --- draw() Ende ---
 
 function mousePressed(){
+  // mouseIsOn = true;//!mouseIsOn;
   mouseIsOn = !mouseIsOn;
 }// --- mousePressed() Ende ---
 
@@ -69,21 +73,25 @@ function theMagic(){
       px = x + lineOffset;
       x += stepSize;
       ax = x - lineOffset;
+      ay = y;
       break;
     case 1:// nach oben
-      py = y + lineOffset;
+      py = y - lineOffset;
       y -= stepSize;
       ay = y + lineOffset;
+      ax = x;
       break;
     case 2:// nach links
       px = x - lineOffset;
       x -= stepSize;
       ax = x + lineOffset;
+      ay = y;
       break;
     case 3:// nach unten
       py = y + lineOffset;
       y += stepSize;
       ay = y - lineOffset;
+      ax = x;
       break;
   }
   if (step % stepsPerSide == 0){// wenn eine Seitenlänge gestept wurde, dann abbiegen.
@@ -95,7 +103,17 @@ function theMagic(){
   }
   step++;
   num++;
-
 }// --- theMagic() Ende ---
+
+function isPrime(number){
+  if (number == 1){
+    return false;
+  }
+  for (let i = 2; i <= sqrt(number); i++){
+    if ( number % 2 == 0)
+    return false;
+  }
+  return true;
+}
 
 
